@@ -1,11 +1,7 @@
-package connexion.testunitaire;
+package fr.testunitaire.ihm;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,10 +9,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -31,15 +23,17 @@ import javafx.stage.Stage;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
+import fr.testunitaire.dao.JSONAccess;
+import fr.testunitaire.entité.User;
 
 
 public class SignUpController {
+	@FXML private ImageView goBack;
 	@FXML private TextField login;
 	@FXML private PasswordField mdp;
 	@FXML private PasswordField confirmMdp;
-	@FXML private ComboBox role;
+	@FXML private ComboBox<String> role;
 	@FXML private TextField nom;
 	@FXML private TextField prenom;
 	@FXML private TextField tel;
@@ -49,6 +43,7 @@ public class SignUpController {
 	@FXML private Button photoButton;
 	@FXML private ImageView photo;
 	@FXML private Label message;
+	
 	File selectedFile = null;
 	private Stage stage;
 	ObservableList<String> roleList = FXCollections.observableArrayList("Utilisateur","Administrateur");
@@ -60,25 +55,20 @@ public class SignUpController {
 	}
 	
 	@FXML
-    private void goBack(ActionEvent event) throws IOException {
-    	try {
-        	stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/login.fxml"));
-        	Parent root  = loader.load();
-        	Scene scene = new Scene(root);
-        	stage.setScene(scene);
-        	stage.show();
-    	}
-    	finally {
-    		
-    	}
+    private void goBack() throws IOException {
+    	App.setRoot("login");
+    }
+	
+	@FXML
+    private void mouseEntered() {
+		goBack.setStyle("-fx-cursor: hand;");
     }
 	
 	@FXML
     private void chooseFile(ActionEvent event) throws IOException {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files","*.png","*.jpg","*.gif"));
+        fileChooser.getExtensionFilters().add(new ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png", "*.bmp", "*.gif"));
         selectedFile = fileChooser.showOpenDialog(stage);
         if(selectedFile!=null) {
         	Image image = new Image(selectedFile.toString());

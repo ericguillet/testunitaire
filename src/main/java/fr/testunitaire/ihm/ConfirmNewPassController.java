@@ -1,33 +1,41 @@
-package connexion.testunitaire;
+package fr.testunitaire.ihm;
 
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
+import fr.testunitaire.dao.JSONAccess;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 public class ConfirmNewPassController {
   private Stage stage = new Stage();
+  
   @FXML private JSONObject user;
+  @FXML private ImageView goBack;
   @FXML private PasswordField newMdp;
   @FXML private PasswordField confNewMdp;
   @FXML private Label errorLabel;
-  
+
+	@FXML
+    private void goBack() throws IOException {
+    	App.setRoot("login");
+    }
+	
+	@FXML
+    private void mouseEntered() {
+		goBack.setStyle("-fx-cursor: hand;");
+    }
+
   @FXML public void setUser(JSONObject userObject) {
     user = userObject;
   }
-	
+
   @SuppressWarnings("unchecked")
   @FXML
   private void confirmNewPass(ActionEvent event) throws IOException {

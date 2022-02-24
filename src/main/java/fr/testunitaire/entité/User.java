@@ -1,7 +1,6 @@
-package connexion.testunitaire;
+package fr.testunitaire.entité;
 
 import java.io.File;
-import java.time.LocalDate;
 	
 public class User {
 	private String login;
