@@ -1,38 +1,28 @@
-package connexion.testunitaire;
+package fr.testunitaire.ihm;
 
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import fr.testunitaire.dao.JSONAccess;
+import fr.testunitaire.entité.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
 
 public class UserListController {
-	private Stage stage = new Stage();
+	@FXML private ImageView goBack;
 	@FXML private TableView<User> userTable;
 	@FXML private TableColumn<User,String> fnameCol;
 	@FXML private TableColumn<User,String> lnameCol;
@@ -41,7 +31,9 @@ public class UserListController {
 	@FXML private TableColumn<User,String> mailCol;
 	@FXML private TableColumn<User,String> adrCol;
 	@FXML private TableColumn<User,String> ddnCol;
+	
 	private ObservableList<User> users = FXCollections.observableArrayList(getUserList(JSONAccess.getJSON()));
+	
 	@FXML
 	public void initialize () {
 		fnameCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
@@ -55,18 +47,13 @@ public class UserListController {
 	}
 	
 	@FXML
-    private void goBack(ActionEvent event) throws IOException {
-    	try {
-        	stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-    		FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/login.fxml"));
-        	Parent root  = loader.load();
-        	Scene scene = new Scene(root);
-        	stage.setScene(scene);
-        	stage.show();
-    	}
-    	finally {
-    		
-    	}
+    private void goBack() throws IOException {
+    	App.setRoot("login");
+    }
+	
+	@FXML
+    private void mouseEntered() {
+		goBack.setStyle("-fx-cursor: hand;");
     }
 	
 	@FXML

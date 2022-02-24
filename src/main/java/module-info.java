@@ -7,7 +7,8 @@ module connexion.testunitaire {
 	requires json.simple;
 	requires com.fasterxml.jackson.databind;
 	requires com.fasterxml.jackson.annotation;
-
-    opens connexion.testunitaire to javafx.fxml;
-    exports connexion.testunitaire;
+	
+    opens fr.testunitaire.ihm to javafx.fxml;
+    exports fr.testunitaire.ihm;
+    exports fr.testunitaire.entité;
 }

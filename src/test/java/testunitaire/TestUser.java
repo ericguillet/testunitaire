@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 
-import connexion.testunitaire.User;
+import fr.testunitaire.entité.User;
 
 class TestUser {
 	

@@ -1,14 +1,11 @@
-package connexion.testunitaire;
+package fr.testunitaire.ihm;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
+import fr.testunitaire.dao.JSONAccess;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -20,9 +17,8 @@ import javafx.event.ActionEvent;
 import javafx.stage.Stage;
 
 public class LoginController{	
-  private Stage stage = new Stage();
-  private Scene scene;
-  private Parent root;
+  static private Stage stage = new Stage();
+  
   @FXML private TextField loginInput;
   @FXML private PasswordField mdpInput;
   

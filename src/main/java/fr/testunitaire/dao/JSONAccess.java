@@ -1,4 +1,4 @@
-package connexion.testunitaire;
+package fr.testunitaire.dao;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -13,7 +13,7 @@ public class JSONAccess {
   @SuppressWarnings("exports")
   public static JSONArray getJSON(){
     JSONParser parser = new JSONParser();
-    try (Reader reader = new FileReader("src/main/resources/connexion/testunitaire/user.json")){
+    try (Reader reader = new FileReader("src\\main\\resources\\fr\\testunitaire\\data\\user.json")){
       JSONArray jsonArray = (JSONArray) parser.parse(reader);
       return jsonArray;
     } catch (IOException e) {
@@ -26,7 +26,7 @@ public class JSONAccess {
   
   @SuppressWarnings("exports")
   public static void writeToJSON(JSONArray jsonArray) {
-    try (FileWriter file = new FileWriter("src\\main\\resources\\connexion\\testunitaire\\user.json")){
+    try (FileWriter file = new FileWriter("src\\main\\resources\\fr\\testunitaire\\data\\user.json")){
       System.out.println(jsonArray.toJSONString());
       file.write(jsonArray.toJSONString());
       file.flush();
