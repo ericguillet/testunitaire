@@ -25,6 +25,7 @@ public class ForgotPassController {
   private Stage stage = new Stage();
   @FXML private TextField login;
   @FXML private Label newPass;
+  
 	
   @FXML
   private void sendNewPass() {
